@@ -26,13 +26,14 @@ class StockController {
       `${targetStock.region}${targetStock.code}`
     );
     ctx.body = successRes({
-      industry: boards,
+      industry: boards.slice(0, 3),
       marketValue: debt_decapital_structure[0]?.ASSET,
       pe: "",
       pb: "",
-      trendResult,
       stock: {
         ...targetStock,
+        value: Number(trendResult.date[0].trade).toFixed(2),
+        date:trendResult.date[0].opendate 
       },
     });
   }

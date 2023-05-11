@@ -37,7 +37,8 @@ class SyncController {
 
   async syncTrend(ctx, next) {
     const allStock = await service.selectAllStock();
-    const result = await fetchTrend(allStock);
+    // TODO: 上次同步到310
+    const result = await fetchTrend(allStock.slice(310));
     ctx.body = successRes({
       info: `资金流向同步完成 ${result.length} 条${new Date().toString()}`,
       result,
