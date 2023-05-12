@@ -18,18 +18,26 @@ function* genereteTrend(stockList) {
 const insertHelper = (insertData) => {
   const { id, code } = insertData;
   const { valArr } = insertData;
-  valArr.forEach((item) => {
-    selectTrendDataByCodeAndOpenDate({
-      code,
-      opendate: item.opendate,
-    }).then((selectResult) => {
-      if (!selectResult.length) {
-        insertTrendData({
-          id,
-          code,
-          ...item,
-        });
-      }
+  return new Promise((resolve) => {
+    valArr.forEach((item) => {
+      selectTrendDataByCodeAndOpenDate({
+        code,
+        opendate: item.opendate,
+      }).then((selectResult) => {
+        // 如果没找到就插入
+        if (!selectResult.length) {
+          resolve(
+            insertTrendData({
+              id,
+              code,
+              ...item,
+            })
+          );
+        }else {
+          // 否则继续下一个
+          resolve(true)
+        }
+      });
     });
   });
 };
@@ -48,8 +56,10 @@ const fetchTrend = (stockList) => {
             valArr: val.date,
           };
           result.push(insertData);
-          insertHelper(insertData);
-          co();
+          insertHelper(insertData).then(val => {
+            // 插入完成后再请求下一个
+            co();
+          });
         });
       }
       if (cur.done) {
