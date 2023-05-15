@@ -19,21 +19,22 @@ class StockController {
     const year = new Date().getFullYear();
     const boards = await getBoards(code);
     // 整体概览数据
-    const guideLine = await getGuideLine(code, year);
-    const { debt_decapital_structure } = guideLine;
+    // const guideLine = await getGuideLine(code, year);
+    // const { debt_decapital_structure } = guideLine;
     const [targetStock] = await syncService.selectStockByCode(code);
-    const trendResult = await getCashTrend(
-      `${targetStock.region}${targetStock.code}`
-    );
+    // const trendResult = await getCashTrend(
+      // `${targetStock.region}${targetStock.code}`
+    // );
+    const [targetValue] = await service.selectLatestValueByCode(code);
     ctx.body = successRes({
-      industry: boards.slice(0, 3),
-      marketValue: debt_decapital_structure[0]?.ASSET,
+      industry: boards,
+      marketValue: "",
       pe: "",
       pb: "",
       stock: {
         ...targetStock,
-        value: Number(trendResult.date[0].trade).toFixed(2),
-        date:trendResult.date[0].opendate 
+        value: targetValue.trade,
+        date: targetValue.opendate
       },
     });
   }

@@ -11,6 +11,12 @@ class StockService {
     ]);
     return result;
   }
+
+  async selectLatestValueByCode(code) {
+    const statement = "SELECT trade, opendate FROM trend WHERE code = ? ORDER BY opendate DESC"
+    const [result] = await conn.execute(statement, [code]);
+    return result;
+  }
 }
 
 module.exports = new StockService();
