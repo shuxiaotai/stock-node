@@ -28,6 +28,8 @@ class StockController {
     const [targetValue] = await service.selectLatestValueByCode(code);
     ctx.body = successRes({
       industry: boards,
+      // trendResult,
+      // guideLine,
       marketValue: "",
       pe: "",
       pb: "",
@@ -38,6 +40,8 @@ class StockController {
       },
     });
   }
+
+  // TODO: 速动比率数据不对
 
   // 1. 盈利能力profitability:
   //   毛利率: gpr, 净利率: npr, 总资产回报率: roa, 净资产回报率(收益率): roe, 资本回报率: roic, 经营性资产回报率: rooa
@@ -65,7 +69,7 @@ class StockController {
         gpr: profitability[0]?.SGPR,
         npr: profitability[0]?.PMOS,
         roa: profitability[0]?.ROA,
-        roe: profitability[0]?.ROE,
+        roe: profitability[0]?.ROEWA,
         roic: "暂无",
         rooa: "暂无",
       },

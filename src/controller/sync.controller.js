@@ -39,7 +39,7 @@ class SyncController {
     const allStock = await service.selectAllStock();
     const result = await fetchTrend(allStock);
     ctx.body = successRes({
-      info: `资金流向同步完成 ${result.length} 条${new Date().toString()}`,
+      info: `价格同步完成 ${result.length} 条${new Date().toString()}`,
       result,
     });
   }

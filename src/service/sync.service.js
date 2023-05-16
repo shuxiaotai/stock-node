@@ -31,6 +31,7 @@ class SyncService {
     return result.length;
   }
 
+  // ROE需要使用ROEWA
   async insertProfitability(item) {
     const statement =
       "INSERT INTO `profitability` (stock_id, code, npr, roa, roe, period) VALUES(?, ?, ?, ?, ?, ?)";
@@ -39,7 +40,7 @@ class SyncService {
       item.code,
       item.PMOS,
       item.ROA,
-      item.ROE,
+      item.ROEWA,
       item.Date,
     ]);
     return result;
