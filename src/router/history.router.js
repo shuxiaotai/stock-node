@@ -1,6 +1,6 @@
 const Router = require("koa-router");
 const {
-  trendValue,
+  historyValue,
   historyPeAndPb,
   historyPs,
   historyMarketValue
@@ -10,7 +10,7 @@ const historyRouter = new Router({
   prefix: "/api/history",
 });
 
-historyRouter.get("/value", trendValue);
+historyRouter.get("/value", historyValue);
 historyRouter.get("/pepb", historyPeAndPb);
 historyRouter.get("/ps", historyPs);
 historyRouter.get("/market/value", historyMarketValue);

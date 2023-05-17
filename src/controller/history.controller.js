@@ -3,24 +3,18 @@ const {
   getPeHistory,
   getPbHistory,
   getPsHistory,
-  getMarketValueHistory
+  getMarketValueHistory,
+  getValueHistory
 } = require("../utils/history-helper");
-const service = require("../service/history.service");
 const syncService = require("../service/sync.service");
 
 class HistoryController {
-  async trendValue(ctx, next) {
+  async historyValue(ctx, next) {
     const code = ctx.query.code;
-    const result = await service.selectTrendValueByCode(code);
-    const date = []
-    const trade = []
-    result.forEach((item) => {
-      date.push(item.opendate)
-      trade.push(item.trade)
-    })
+    const [selectStock] = await syncService.selectStockByCode(code);
+    const result = await getValueHistory(selectStock.region, selectStock.code);
     ctx.body = successRes({
-      date,
-      trade
+      ...result.data
     });
   }
   async historyPeAndPb(ctx, next) {

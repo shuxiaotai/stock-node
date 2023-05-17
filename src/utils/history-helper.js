@@ -28,9 +28,18 @@ const getMarketValueHistory = async (region, code) => {
   return result;
 };
 
+const getValueHistory = async (region, code) => {
+  const result = await axios.get(
+    `https://eniu.com/chart/pricea/${region}${code}/t/all`
+  );
+  return result;
+};
+
+
 module.exports = {
   getPeHistory,
   getPbHistory,
   getPsHistory,
   getMarketValueHistory,
+  getValueHistory
 };
