@@ -25,18 +25,13 @@ class StockController {
     // const trendResult = await getCashTrend(
       // `${targetStock.region}${targetStock.code}`
     // );
-    const [targetValue] = await service.selectLatestValueByCode(code);
+    // const [targetValue] = await service.selectLatestValueByCode(code);
     ctx.body = successRes({
       industry: boards,
       // trendResult,
       // guideLine,
-      marketValue: "",
-      pe: "",
-      pb: "",
       stock: {
-        ...targetStock,
-        value: targetValue.trade,
-        date: targetValue.opendate
+        ...targetStock
       },
     });
   }
