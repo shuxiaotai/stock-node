@@ -1,7 +1,7 @@
 const service = require("../service/stock.service");
 const { successRes } = require("../utils/response");
 
-const { getBoards, getGuideLine, getCashTrend } = require("../app/dip-stock");
+const { getBoards, getGuideLine, getCashTrend } = require("../utils/dipiper-helper");
 const syncService = require("../service/sync.service");
 
 class StockController {

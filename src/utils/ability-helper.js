@@ -1,4 +1,4 @@
-const { getGuideLine } = require("../app/dip-stock");
+const { getGuideLine } = require("./dipiper-helper");
 const {
   selectAbilityByCodeAndPeriod,
   insertProfitability,

@@ -1,4 +1,4 @@
-const { getCashTrend } = require("../app/dip-stock");
+const { getCashTrend } = require("./dipiper-helper");
 const {
   selectTrendDataByCodeAndOpenDate,
   insertTrendData,

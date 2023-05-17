@@ -1,4 +1,4 @@
-const { getStockList, getGuideLine } = require("../app/dip-stock");
+const { getStockList, getGuideLine } = require("../utils/dipiper-helper");
 const { successRes } = require("../utils/response");
 const { fetchGuideLine } = require("../utils/ability-helper");
 const { fetchTrend } = require("../utils/trend-helper");
